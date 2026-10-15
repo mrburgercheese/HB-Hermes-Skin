@@ -1,0 +1,69 @@
+# ==============================================================================
+# Hosterbyte Sage Theme for Hermes Agent (Desktop / TUI / CLI)
+# Inspired by img.hosterbyte.com — Light Retro Sage Green & Matcha Accent
+# Repository: https://github.com/mrburgercheese/HB-Hermes-Skin
+# ==============================================================================
+
+name: hosterbyte-sage
+description: Hosterbyte Sage inspired light theme — herbal pastel & matcha green accent
+
+colors:
+  # Base Canvas & Surface
+  background: "#f4f8f3"          # Hijau herbal pastel adem (canvas)
+
+  # Brand Accent
+  ui_accent: "#2e7d52"           # Matcha green primary
+  banner_accent: "#2e7d52"
+
+  # Text Hierarchy
+  banner_title: "#132e20"        # Deep forest headings
+  ui_primary: "#132e20"          # Deep forest primary text
+  banner_text: "#132e20"         # Deep forest crisp body text
+  ui_text: "#132e20"
+  ui_label: "#132e20"
+  banner_dim: "#527863"          # Eucalyptus slate secondary/muted text
+  banner_border: "#bcd2bf"       # Muted sage border matching herbal canvas
+  ui_border: "#bcd2bf"
+
+  # Semantic Status Colors
+  ui_ok: "#2e7d52"               # Matcha green / success
+  ui_warn: "#b45309"             # Warm amber warning
+  ui_error: "#e11d48"            # Retro crimson red (from img.hosterbyte.com)
+
+  # CLI / TUI Chrome & Status Bar
+  prompt: "#2e7d52"
+  input_rule: "#2e7d52"
+  response_border: "#2e7d52"
+  status_bar_bg: "#ebf3ea"       # Soft matcha highlight
+  status_bar_text: "#132e20"
+  status_bar_good: "#2e7d52"
+  status_bar_warn: "#b45309"
+  status_bar_critical: "#e11d48"
+  session_label: "#132e20"
+  session_border: "#bcd2bf"
+
+  # Tool & Reasoning Elements
+  ui_tool: "#2e7d52"             # Matcha green tool marker
+  ui_thinking: "#527863"         # Eucalyptus slate reasoning text
+
+  # Code Syntax
+  syntax_string: "#1e6b3b"       # Matcha green strings
+  syntax_number: "#b45309"       # Warm amber numbers
+  syntax_keyword: "#047857"      # Deep emerald keywords
+  syntax_comment: "#6b8f78"      # Eucalyptus muted comments
+
+  # Diffs
+  diff_added: "#d1fae5"          # Soft mint badge
+  diff_removed: "#ffe4e6"        # Soft crimson light
+  diff_added_word: "#a7f3d0"
+  diff_removed_word: "#fecdd3"
+
+  # Completion Menu
+  completion_menu_bg: "#ebf3ea"
+  completion_menu_current_bg: "#d1fae5"
+
+branding:
+  agent_name: Lexa
+  prompt_symbol: "❯"
+
+tool_prefix: "┊"

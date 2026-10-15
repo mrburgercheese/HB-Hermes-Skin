@@ -1,0 +1,69 @@
+# ==============================================================================
+# Hosterbyte Dark Theme for Hermes Agent (Desktop / TUI / CLI)
+# Inspired by img.hosterbyte.com — Dark Retro Evergreen & Vibrant Emerald Accent
+# Repository: https://github.com/mrburgercheese/HB-Hermes-Skin
+# ==============================================================================
+
+name: hosterbyte-dark
+description: Hosterbyte Evergreen dark theme — deep forest canvas & vibrant emerald accent
+
+colors:
+  # Base Canvas & Surface
+  background: "#122017"          # Deep evergreen dark canvas (velvety forest)
+
+  # Brand Accent
+  ui_accent: "#10b981"           # Vibrant emerald / fresh mint accent
+  banner_accent: "#10b981"
+
+  # Text Hierarchy
+  banner_title: "#f4f8f3"        # Crisp herbal sage white headings
+  ui_primary: "#f4f8f3"          # Primary white text
+  banner_text: "#e1ece3"         # Soft mint-cream body text (low eye strain)
+  ui_text: "#e1ece3"
+  ui_label: "#e1ece3"
+  banner_dim: "#7ca289"          # Eucalyptus sage secondary/muted text
+  banner_border: "#224230"       # Subtle deep evergreen border
+  ui_border: "#224230"
+
+  # Semantic Status Colors
+  ui_ok: "#10b981"               # Vibrant emerald / success
+  ui_warn: "#fbbf24"             # Sunlight amber warning
+  ui_error: "#e11d48"            # Retro crimson red (from img.hosterbyte.com)
+
+  # CLI / TUI Chrome & Status Bar
+  prompt: "#10b981"
+  input_rule: "#10b981"
+  response_border: "#10b981"
+  status_bar_bg: "#0c1811"       # Ultra deep night forest bar
+  status_bar_text: "#e1ece3"
+  status_bar_good: "#10b981"
+  status_bar_warn: "#fbbf24"
+  status_bar_critical: "#e11d48"
+  session_label: "#f4f8f3"
+  session_border: "#224230"
+
+  # Tool & Reasoning Elements
+  ui_tool: "#10b981"             # Emerald tool marker
+  ui_thinking: "#7ca289"         # Muted eucalyptus reasoning text
+
+  # Code Syntax
+  syntax_string: "#34d399"       # Fresh mint strings
+  syntax_number: "#fbbf24"       # Sunlight amber numbers
+  syntax_keyword: "#6ee7b7"      # Bright sage keywords
+  syntax_comment: "#638973"      # Muted eucalyptus comments
+
+  # Diffs
+  diff_added: "#123723"
+  diff_removed: "#45121b"
+  diff_added_word: "#1b5335"
+  diff_removed_word: "#691b29"
+
+  # Completion Menu
+  completion_menu_bg: "#16281e"
+  completion_menu_current_bg: "#244533"
+
+branding:
+  agent_name: Lexa
+  prompt_symbol: "❯"
+
+tool_prefix: "┊"
