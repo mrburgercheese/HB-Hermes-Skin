@@ -204,14 +204,21 @@ customCSS: |
     position: relative !important;
   }
 
+  /* Ruang padding kanan baris sesi agar tidak bertabrakan dengan elemen kanan */
   .row-hover:has(span[role="status"]),
   .row-hover[data-working="true"] {
-    padding-right: 70px !important;
+    padding-right: 66px !important;
   }
-
   .row-hover:has(span[role="status"]):hover,
   .row-hover[data-working="true"]:hover {
-    padding-right: 88px !important;
+    padding-right: 84px !important;
+  }
+
+  .row-hover:not(:has(span[role="status"])):not([data-working="true"]) {
+    padding-right: 42px !important;
+  }
+  .row-hover:not(:has(span[role="status"])):not([data-working="true"]):hover {
+    padding-right: 58px !important;
   }
 
   /* 1. STATE WORKING: Emerald Badge */
@@ -220,7 +227,7 @@ customCSS: |
   .row-hover[data-working="true"]::after {
     content: 'WORKING' !important;
     position: absolute !important;
-    top: 7px !important;
+    top: 6px !important;
     right: 8px !important;
     transform: none !important;
     font-size: 8px !important;
@@ -245,7 +252,7 @@ customCSS: |
   .row-hover:has(span[role="status"].bg-amber-500)::after {
     content: 'INPUT' !important;
     position: absolute !important;
-    top: 7px !important;
+    top: 6px !important;
     right: 8px !important;
     transform: none !important;
     font-size: 8px !important;
@@ -270,7 +277,7 @@ customCSS: |
   .row-hover:has(span[role="status"].bg-\(--ui-success\))::after {
     content: 'NEW' !important;
     position: absolute !important;
-    top: 7px !important;
+    top: 6px !important;
     right: 8px !important;
     transform: none !important;
     font-size: 8px !important;
@@ -294,7 +301,7 @@ customCSS: |
   .row-hover:has(span[role="status"].border-\(--ui-accent\))::after {
     content: 'STALLED' !important;
     position: absolute !important;
-    top: 7px !important;
+    top: 6px !important;
     right: 8px !important;
     transform: none !important;
     font-size: 8px !important;
@@ -318,7 +325,7 @@ customCSS: |
   .row-hover time {
     position: absolute !important;
     right: 8px !important;
-    top: 24px !important;
+    top: 23px !important;
     bottom: auto !important;
     font-size: 9px !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
@@ -346,21 +353,12 @@ customCSS: |
     z-index: 6 !important;
   }
 
-  /* Proteksi Judul: Mencegah teks judul bertabrakan dengan badge kanan */
-  .row-hover:has(span[role="status"]) span.truncate,
-  .row-hover:has(span[role="status"]) div.truncate,
-  .row-hover:has(span[role="status"]) [data-slot="sidebar-row-label"] {
-    padding-right: 68px !important;
-  }
-  .row-hover:has(span[role="status"]):hover span.truncate,
-  .row-hover:has(span[role="status"]):hover div.truncate,
-  .row-hover:has(span[role="status"]):hover [data-slot="sidebar-row-label"] {
-    padding-right: 86px !important;
-  }
-
-  /* Pembersihan: Sembunyikan preview pesan chat jika Card Mode sempat aktif */
-  .row-hover:has(.flex-col) [class*="text-(--ui-text-quaternary)"] {
-    display: none !important;
+  /* Proteksi Judul & Metadata: Hilangkan double padding agar teks LEBAR & TIDAK TERPOTONG */
+  .row-hover span.truncate,
+  .row-hover div.truncate,
+  .row-hover [data-slot="sidebar-row-label"] {
+    padding-right: 0 !important;
+    max-width: 100% !important;
   }
 
   /* Kompatibilitas jika ada elemen .hb-status-badge */
