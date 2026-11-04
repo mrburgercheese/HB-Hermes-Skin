@@ -2,6 +2,13 @@
 
 Semua perubahan penting pada repositori **HB-Hermes-Skin** didokumentasikan di berkas ini. Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id/1.0.0/) dan [Semantic Versioning](https://semver.org/).
 
+## [v1.1.1] - 2026-11-04 18:30 WIB
+
+### Fixed & Improved
+- **Stacked Layout Optimization**: Memisahkan badge status dan timestamp jam sesi di sidebar card mode secara rapi. Badge status diposisikan di sudut kanan atas (`top: 7px, right: 8px`), sedangkan jam sesi berada di bawah badge (`top: 24px, right: 8px`).
+- **Inline Pseudo-Element Badges**: Merender status badge (`WORKING`, `INPUT`, `NEW`, `STALLED`) murni via CSS pseudo-element (`::after`) pada session row tanpa dependensi plugin eksternal.
+- **Dual-Theme Support**: Menyelaraskan implementasi stacked status badge dan timestamp pada skin `hosterbyte-dark` dan `hosterbyte-sage`.
+
 ## [v1.1.0] - 2026-11-03 17:30 WIB
 
 ### Added

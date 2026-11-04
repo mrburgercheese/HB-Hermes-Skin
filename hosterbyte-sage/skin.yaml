@@ -5,6 +5,7 @@
 # ==============================================================================
 
 name: hosterbyte-sage
+version: 1.1.1
 description: Hosterbyte Sage inspired light theme — herbal pastel & matcha green accent
 
 colors:
