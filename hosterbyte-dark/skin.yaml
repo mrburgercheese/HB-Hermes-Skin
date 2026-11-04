@@ -80,8 +80,9 @@ customCSS: |
     --arc-c1: #10b981 !important;
     --arc-c2: #34d399 !important;
     --arc-duration: 2.2s !important;
-    filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.85)) drop-shadow(0 0 8px rgba(16, 185, 129, 0.45));
-    animation: hb-arc-pulse 2s ease-in-out infinite alternate !important;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.45), inset 0 0 4px rgba(16, 185, 129, 0.25) !important;
+    animation: hb-arc-pulse 2.5s ease-in-out infinite alternate !important;
+    will-change: opacity !important;
   }
 
   .arc-border.arc-row::before {
@@ -108,10 +109,10 @@ customCSS: |
 
   @keyframes hb-arc-pulse {
     0%, 100% {
-      filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.7)) drop-shadow(0 0 6px rgba(16, 185, 129, 0.35));
+      opacity: 0.88;
     }
     50% {
-      filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.95)) drop-shadow(0 0 10px rgba(52, 211, 153, 0.6));
+      opacity: 1;
     }
   }
 
@@ -174,9 +175,8 @@ customCSS: |
     }
     50% {
       box-shadow: 
-        0 0 0 2.5px rgba(0, 255, 135, 0.95),
-        0 0 8px rgba(0, 255, 135, 0.85),
-        0 0 16px rgba(0, 255, 135, 0.6);
+        0 0 0 2px rgba(0, 255, 135, 0.9),
+        0 0 8px rgba(0, 255, 135, 0.7);
     }
   }
 
@@ -188,30 +188,36 @@ customCSS: |
     }
     50% {
       box-shadow: 
-        0 0 0 2.5px rgba(255, 149, 0, 0.95),
-        0 0 9px rgba(255, 149, 0, 0.85),
-        0 0 16px rgba(255, 149, 0, 0.6);
+        0 0 0 2px rgba(255, 149, 0, 0.9),
+        0 0 8px rgba(255, 149, 0, 0.7);
     }
   }
 
   /* ============================================================ */
   /* Mini Status Badge & Stacked Timestamp (Sesuai Diagram HB)   */
+  /* Tata Letak 2-Baris Presisi Sesuai Gambar 1:                 */
+  /*   Baris 1 Kanan: Badge Status (top: 7px, right: 8px)         */
+  /*   Baris 2 Kanan: Jam Sesi "now" (top: 24px, right: 8px)      */
   /* ============================================================ */
 
-  /* ------------------------------------------------------------ */
-  /* A. CARD MODE (Inbox Style 3 Baris):                          */
-  /*    Atas Kanan: Badge [ WORKING ]                             */
-  /*    Bawah Kanan: Jam sesi "now" (tepat di bawah badge)        */
-  /* ------------------------------------------------------------ */
-  .row-hover:has(.flex-col) {
+  .row-hover {
     position: relative !important;
-    padding-right: 68px !important;
   }
 
-  /* Badge Status Kanan Atas pada Card Mode */
-  .row-hover:has(.flex-col):has(span[role="status"][class*="bg-(--ui-accent)"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].bg-\(--ui-accent\))::after,
-  .row-hover:has(.flex-col)[data-working="true"]::after {
+  .row-hover:has(span[role="status"]),
+  .row-hover[data-working="true"] {
+    padding-right: 70px !important;
+  }
+
+  .row-hover:has(span[role="status"]):hover,
+  .row-hover[data-working="true"]:hover {
+    padding-right: 88px !important;
+  }
+
+  /* 1. STATE WORKING: Emerald Badge */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-accent\))::after,
+  .row-hover[data-working="true"]::after {
     content: 'WORKING' !important;
     position: absolute !important;
     top: 7px !important;
@@ -231,10 +237,12 @@ customCSS: |
     animation: hb-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="bg-amber-500"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].bg-amber-500)::after {
+  /* 2. STATE NEEDS-INPUT: Sun Amber Alert Badge */
+  .row-hover:has(span[role="status"][class*="bg-amber-500"])::after,
+  .row-hover:has(span[role="status"].bg-amber-500)::after {
     content: 'INPUT' !important;
     position: absolute !important;
     top: 7px !important;
@@ -254,10 +262,12 @@ customCSS: |
     animation: hb-badge-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="bg-(--ui-success)"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].bg-\(--ui-success\))::after {
+  /* 3. STATE UNREAD: Neon Magenta/Purple Badge */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-success)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-success\))::after {
     content: 'NEW' !important;
     position: absolute !important;
     top: 7px !important;
@@ -276,10 +286,12 @@ customCSS: |
     border: 1px solid rgba(217, 70, 239, 0.45) !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="border-(--ui-accent)"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].border-\(--ui-accent\))::after {
+  /* 4. STATE STALLED / BACKGROUND: Hollow Emerald Dashed Badge */
+  .row-hover:has(span[role="status"][class*="border-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].border-\(--ui-accent\))::after {
     content: 'STALLED' !important;
     position: absolute !important;
     top: 7px !important;
@@ -298,138 +310,57 @@ customCSS: |
     border: 1px dashed rgba(0, 255, 135, 0.4) !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  /* Jam sesi (time) ditempatkan tepat di bawah badge status di sisi kanan */
-  .row-hover:has(.flex-col) [data-row-actions] time {
+  /* Jam sesi (time): tepat berada di bawah status badge di baris kedua */
+  .row-hover [data-row-actions] time,
+  .row-hover time {
     position: absolute !important;
     right: 8px !important;
     top: 24px !important;
+    bottom: auto !important;
     font-size: 9px !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     color: var(--ui-text-tertiary, #7ca289) !important;
     line-height: 1 !important;
     z-index: 4 !important;
+    text-align: right !important;
+    transition: right 0.15s ease !important;
   }
 
-  /* Tombol kebab menu (⋯) */
-  .row-hover:has(.flex-col) button[data-session-actions] {
+  /* Geser badge dan time ke kiri saat baris di-hover agar tidak tertabrak tombol kebab (⋮) */
+  .row-hover:hover::after {
+    right: 26px !important;
+  }
+  .row-hover:hover [data-row-actions] time,
+  .row-hover:hover time {
+    right: 26px !important;
+  }
+
+  /* Tombol kebab menu (⋮) di pojok kanan */
+  .row-hover button[data-session-actions] {
     position: absolute !important;
     right: 4px !important;
-    bottom: 6px !important;
+    bottom: 5px !important;
     z-index: 6 !important;
   }
 
-  /* ------------------------------------------------------------ */
-  /* B. FLAT MODE (1 Baris Ringkas):                             */
-  /* ------------------------------------------------------------ */
-  .row-hover:not(:has(.flex-col)):has(span[role="status"]),
-  .row-hover:not(:has(.flex-col))[data-working="true"] {
-    padding-right: 56px !important;
+  /* Proteksi Judul: Mencegah teks judul bertabrakan dengan badge kanan */
+  .row-hover:has(span[role="status"]) span.truncate,
+  .row-hover:has(span[role="status"]) div.truncate,
+  .row-hover:has(span[role="status"]) [data-slot="sidebar-row-label"] {
+    padding-right: 68px !important;
+  }
+  .row-hover:has(span[role="status"]):hover span.truncate,
+  .row-hover:has(span[role="status"]):hover div.truncate,
+  .row-hover:has(span[role="status"]):hover [data-slot="sidebar-row-label"] {
+    padding-right: 86px !important;
   }
 
-  .row-hover:not(:has(.flex-col)):has(span[role="status"]):hover,
-  .row-hover:not(:has(.flex-col))[data-working="true"]:hover {
-    padding-right: 74px !important;
-  }
-
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="bg-(--ui-accent)"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].bg-\(--ui-accent\))::after,
-  .row-hover:not(:has(.flex-col))[data-working="true"]::after {
-    content: 'WORKING' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
-    background: rgba(0, 255, 135, 0.22) !important;
-    color: #00ff87 !important;
-    border: 1px solid rgba(0, 255, 135, 0.45) !important;
-    animation: hb-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
-  }
-
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="bg-amber-500"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].bg-amber-500)::after {
-    content: 'INPUT' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
-    background: rgba(255, 149, 0, 0.22) !important;
-    color: #ff9500 !important;
-    border: 1px solid rgba(255, 149, 0, 0.45) !important;
-    animation: hb-badge-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
-  }
-
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="bg-(--ui-success)"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].bg-\(--ui-success\))::after {
-    content: 'NEW' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
-    background: rgba(217, 70, 239, 0.22) !important;
-    color: #d946ef !important;
-    border: 1px solid rgba(217, 70, 239, 0.45) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
-  }
-
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="border-(--ui-accent)"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].border-\(--ui-accent\))::after {
-    content: 'STALLED' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
-    background: rgba(0, 255, 135, 0.12) !important;
-    color: #00ff87 !important;
-    border: 1px dashed rgba(0, 255, 135, 0.4) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
-  }
-
-  .row-hover:not(:has(.flex-col)):hover::after {
-    right: 26px !important;
+  /* Pembersihan: Sembunyikan preview pesan chat jika Card Mode sempat aktif */
+  .row-hover:has(.flex-col) [class*="text-(--ui-text-quaternary)"] {
+    display: none !important;
   }
 
   /* Kompatibilitas jika ada elemen .hb-status-badge */
@@ -474,11 +405,9 @@ customCSS: |
 
   @keyframes hb-badge-pulse {
     0%, 100% {
-      opacity: 0.82;
-      transform: scale(0.97);
+      opacity: 0.85;
     }
     50% {
       opacity: 1;
-      transform: scale(1.03);
     }
   }

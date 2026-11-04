@@ -71,26 +71,153 @@ tool_prefix: "┊"
 
 customCSS: |
   /* ============================================================ */
-  /* Mini Status Badge (Inline Pseudo-Element pada Baris Sesi)    */
+  /* Hosterbyte Dark: Enhanced Running Arc & Stardust Sparks      */
   /* ============================================================ */
+  .arc-border.arc-row,
+  :root.dark .arc-border.arc-row {
+    --arc-width: 2px !important;
+    --arc-c0: rgba(16, 185, 129, 0) !important;
+    --arc-c1: #10b981 !important;
+    --arc-c2: #34d399 !important;
+    --arc-duration: 2.2s !important;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.45), inset 0 0 4px rgba(16, 185, 129, 0.25) !important;
+    animation: hb-arc-pulse 2.5s ease-in-out infinite alternate !important;
+    will-change: opacity !important;
+  }
+
+  .arc-border.arc-row::before {
+    background:
+      radial-gradient(circle 2px at 20% 25%, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
+      radial-gradient(circle 1.5px at 60% 70%, #a7f3d0 0%, rgba(167, 243, 208, 0) 100%),
+      radial-gradient(circle 2.5px at 80% 35%, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
+      radial-gradient(circle 1.5px at 35% 80%, #6ee7b7 0%, rgba(110, 231, 183, 0) 100%),
+      repeating-linear-gradient(
+        var(--arc-angle),
+        transparent 0%,
+        rgba(16, 185, 129, 0) 14%,
+        rgba(16, 185, 129, 0.4) 20%,
+        #10b981 25%,
+        #6ee7b7 28%,
+        #ffffff 30%,
+        #34d399 32%,
+        rgba(16, 185, 129, 0.4) 37%,
+        transparent 44%,
+        transparent 50%
+      ) !important;
+    background-size: 80px 80px, 60px 60px, 90px 90px, 70px 70px, 100% 100% !important;
+  }
+
+  @keyframes hb-arc-pulse {
+    0%, 100% {
+      opacity: 0.88;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* ============================================================ */
+  /* Session Status Dot: 6px High-Contrast Outer Dimmer Halo      */
+  /* ============================================================ */
+
+  /* Ukuran dot seimbang 6px presisi */
+  span[role="status"] {
+    width: 6px !important;
+    height: 6px !important;
+    min-width: 6px !important;
+    min-height: 6px !important;
+    max-width: 6px !important;
+    max-height: 6px !important;
+    display: inline-block !important;
+    border-radius: 9999px !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  /* 1. STATE WORKING (Aktif eksekusi): Vivid Electric Emerald (#2e7d52) + Intense Halo */
+  span[role="status"].bg-\(--ui-accent\),
+  span[role="status"][class*="bg-(--ui-accent)"] {
+    background-color: #2e7d52 !important;
+    border: none !important;
+    animation: hb-dot-halo-emerald 2.0s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+  }
+
+  /* 2. STATE STALLED / BACKGROUND: Electric Emerald Hollow (Garis Tajam) */
+  span[role="status"].border-\(--ui-accent\),
+  span[role="status"][class*="border-(--ui-accent)"] {
+    border: 2px solid #2e7d52 !important;
+    background-color: transparent !important;
+    animation: hb-dot-halo-emerald 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+  }
+
+  /* 3. STATE NEEDS-INPUT (Butuh respon): Blazing Sun Amber/Orange (#b45309) + Alert Pulse */
+  span[role="status"].bg-amber-500,
+  span[role="status"][class*="bg-amber-500"] {
+    background-color: #b45309 !important;
+    border: none !important;
+    animation: hb-dot-halo-amber 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+  }
+
+  /* 4. STATE UNREAD (Selesai belum dilihat): Cyber Magenta / Neon Purple (#e11d48) + Steady Glow */
+  span[role="status"].bg-\(--ui-success\),
+  span[role="status"][class*="bg-(--ui-success)"] {
+    background-color: #e11d48 !important;
+    border: none !important;
+    animation: hb-dot-halo-purple 2.6s ease-in-out infinite alternate !important;
+  }
+
+  /* High-Contrast Keyframes (Inti solid tajam, pancaran aura luar lebih jelas) */
+  @keyframes hb-dot-halo-emerald {
+    0%, 100% {
+      box-shadow: 
+        0 0 0 1px rgba(0, 255, 135, 0.5),
+        0 0 4px rgba(0, 255, 135, 0.35);
+    }
+    50% {
+      box-shadow: 
+        0 0 0 2px rgba(0, 255, 135, 0.9),
+        0 0 8px rgba(0, 255, 135, 0.7);
+    }
+  }
+
+  @keyframes hb-dot-halo-amber {
+    0%, 100% {
+      box-shadow: 
+        0 0 0 1px rgba(255, 149, 0, 0.5),
+        0 0 4px rgba(255, 149, 0, 0.35);
+    }
+    50% {
+      box-shadow: 
+        0 0 0 2px rgba(255, 149, 0, 0.9),
+        0 0 8px rgba(255, 149, 0, 0.7);
+    }
+  }
 
   /* ============================================================ */
   /* Mini Status Badge & Stacked Timestamp (Sesuai Diagram HB)   */
+  /* Tata Letak 2-Baris Presisi Sesuai Gambar 1:                 */
+  /*   Baris 1 Kanan: Badge Status (top: 7px, right: 8px)         */
+  /*   Baris 2 Kanan: Jam Sesi "now" (top: 24px, right: 8px)      */
   /* ============================================================ */
 
-  /* ------------------------------------------------------------ */
-  /* A. CARD MODE (Inbox Style 3 Baris):                          */
-  /*    Atas Kanan: Badge [ WORKING ]                             */
-  /*    Bawah Kanan: Jam sesi "now" (tepat di bawah badge)        */
-  /* ------------------------------------------------------------ */
-  .row-hover:has(.flex-col) {
+  .row-hover {
     position: relative !important;
-    padding-right: 68px !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="bg-(--ui-accent)"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].bg-\(--ui-accent\))::after,
-  .row-hover:has(.flex-col)[data-working="true"]::after {
+  .row-hover:has(span[role="status"]),
+  .row-hover[data-working="true"] {
+    padding-right: 70px !important;
+  }
+
+  .row-hover:has(span[role="status"]):hover,
+  .row-hover[data-working="true"]:hover {
+    padding-right: 88px !important;
+  }
+
+  /* 1. STATE WORKING: Emerald Badge */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-accent\))::after,
+  .row-hover[data-working="true"]::after {
     content: 'WORKING' !important;
     position: absolute !important;
     top: 7px !important;
@@ -110,10 +237,12 @@ customCSS: |
     animation: hb-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="bg-amber-500"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].bg-amber-500)::after {
+  /* 2. STATE NEEDS-INPUT: Sun Amber Alert Badge */
+  .row-hover:has(span[role="status"][class*="bg-amber-500"])::after,
+  .row-hover:has(span[role="status"].bg-amber-500)::after {
     content: 'INPUT' !important;
     position: absolute !important;
     top: 7px !important;
@@ -133,10 +262,12 @@ customCSS: |
     animation: hb-badge-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="bg-(--ui-success)"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].bg-\(--ui-success\))::after {
+  /* 3. STATE UNREAD: Neon Magenta/Purple Badge */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-success)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-success\))::after {
     content: 'NEW' !important;
     position: absolute !important;
     top: 7px !important;
@@ -155,10 +286,12 @@ customCSS: |
     border: 1px solid rgba(225, 29, 72, 0.4) !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col):has(span[role="status"][class*="border-(--ui-accent)"])::after,
-  .row-hover:has(.flex-col):has(span[role="status"].border-\(--ui-accent\))::after {
+  /* 4. STATE STALLED / BACKGROUND: Hollow Emerald Dashed Badge */
+  .row-hover:has(span[role="status"][class*="border-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].border-\(--ui-accent\))::after {
     content: 'STALLED' !important;
     position: absolute !important;
     top: 7px !important;
@@ -177,146 +310,104 @@ customCSS: |
     border: 1px dashed rgba(46, 125, 82, 0.4) !important;
     pointer-events: none !important;
     z-index: 5 !important;
+    transition: right 0.15s ease !important;
   }
 
-  /* Jam sesi (time) ditempatkan tepat di bawah badge status di sisi kanan */
-  .row-hover:has(.flex-col) [data-row-actions] time {
+  /* Jam sesi (time): tepat berada di bawah status badge di baris kedua */
+  .row-hover [data-row-actions] time,
+  .row-hover time {
     position: absolute !important;
     right: 8px !important;
     top: 24px !important;
+    bottom: auto !important;
     font-size: 9px !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     color: var(--ui-text-tertiary, #527863) !important;
     line-height: 1 !important;
     z-index: 4 !important;
+    text-align: right !important;
+    transition: right 0.15s ease !important;
   }
 
-  .row-hover:has(.flex-col) button[data-session-actions] {
+  /* Geser badge dan time ke kiri saat baris di-hover agar tidak tertabrak tombol kebab (⋮) */
+  .row-hover:hover::after {
+    right: 26px !important;
+  }
+  .row-hover:hover [data-row-actions] time,
+  .row-hover:hover time {
+    right: 26px !important;
+  }
+
+  /* Tombol kebab menu (⋮) di pojok kanan */
+  .row-hover button[data-session-actions] {
     position: absolute !important;
     right: 4px !important;
-    bottom: 6px !important;
+    bottom: 5px !important;
     z-index: 6 !important;
   }
 
-  /* ------------------------------------------------------------ */
-  /* B. FLAT MODE (1 Baris Ringkas):                             */
-  /* ------------------------------------------------------------ */
-  .row-hover:not(:has(.flex-col)):has(span[role="status"]),
-  .row-hover:not(:has(.flex-col))[data-working="true"] {
-    padding-right: 56px !important;
+  /* Proteksi Judul: Mencegah teks judul bertabrakan dengan badge kanan */
+  .row-hover:has(span[role="status"]) span.truncate,
+  .row-hover:has(span[role="status"]) div.truncate,
+  .row-hover:has(span[role="status"]) [data-slot="sidebar-row-label"] {
+    padding-right: 68px !important;
+  }
+  .row-hover:has(span[role="status"]):hover span.truncate,
+  .row-hover:has(span[role="status"]):hover div.truncate,
+  .row-hover:has(span[role="status"]):hover [data-slot="sidebar-row-label"] {
+    padding-right: 86px !important;
   }
 
-  .row-hover:not(:has(.flex-col)):has(span[role="status"]):hover,
-  .row-hover:not(:has(.flex-col))[data-working="true"]:hover {
-    padding-right: 74px !important;
+  /* Pembersihan: Sembunyikan preview pesan chat jika Card Mode sempat aktif */
+  .row-hover:has(.flex-col) [class*="text-(--ui-text-quaternary)"] {
+    display: none !important;
   }
 
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="bg-(--ui-accent)"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].bg-\(--ui-accent\))::after,
-  .row-hover:not(:has(.flex-col))[data-working="true"]::after {
-    content: 'WORKING' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
+  /* Kompatibilitas jika ada elemen .hb-status-badge */
+  .hb-status-badge {
     font-size: 8px !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
+    padding: 1px 4px !important;
     border-radius: 3px !important;
     letter-spacing: 0.5px !important;
     text-transform: uppercase !important;
     line-height: 1 !important;
+    margin-bottom: 2px !important;
+    display: inline-block !important;
+  }
+
+  .hb-status-badge.badge-working {
     background: rgba(46, 125, 82, 0.18) !important;
     color: #2e7d52 !important;
     border: 1px solid rgba(46, 125, 82, 0.45) !important;
     animation: hb-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
   }
 
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="bg-amber-500"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].bg-amber-500)::after {
-    content: 'INPUT' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
+  .hb-status-badge.badge-input {
     background: rgba(180, 83, 9, 0.18) !important;
     color: #b45309 !important;
     border: 1px solid rgba(180, 83, 9, 0.45) !important;
     animation: hb-badge-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
   }
 
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="bg-(--ui-success)"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].bg-\(--ui-success\))::after {
-    content: 'NEW' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
+  .hb-status-badge.badge-unread {
     background: rgba(225, 29, 72, 0.16) !important;
     color: #e11d48 !important;
     border: 1px solid rgba(225, 29, 72, 0.4) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
   }
 
-  .row-hover:not(:has(.flex-col)):has(span[role="status"][class*="border-(--ui-accent)"])::after,
-  .row-hover:not(:has(.flex-col)):has(span[role="status"].border-\(--ui-accent\))::after {
-    content: 'STALLED' !important;
-    position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 8px !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-weight: 700 !important;
-    padding: 1.5px 4.5px !important;
-    border-radius: 3px !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
+  .hb-status-badge.badge-stalled {
     background: rgba(46, 125, 82, 0.12) !important;
     color: #2e7d52 !important;
     border: 1px dashed rgba(46, 125, 82, 0.4) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    transition: right 0.15s ease !important;
-  }
-
-  .row-hover:not(:has(.flex-col)):hover::after {
-    right: 26px !important;
   }
 
   @keyframes hb-badge-pulse {
     0%, 100% {
-      opacity: 0.82;
-      transform: scale(0.97);
+      opacity: 0.85;
     }
     50% {
       opacity: 1;
-      transform: scale(1.03);
     }
   }
