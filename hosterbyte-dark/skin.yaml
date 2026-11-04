@@ -195,8 +195,131 @@ customCSS: |
   }
 
   /* ============================================================ */
-  /* Mini Status Badge (Stacked di Atas Jam Sesi)                 */
+  /* Mini Status Badge (Inline Pseudo-Element pada Baris Sesi)    */
   /* ============================================================ */
+
+  /* Beri ruang di kanan baris agar teks judul sesi tidak menabrak badge */
+  .row-hover:has(span[role="status"]),
+  .row-hover[data-working="true"] {
+    padding-right: 56px !important;
+  }
+
+  .row-hover:has(span[role="status"]):hover,
+  .row-hover[data-working="true"]:hover {
+    padding-right: 74px !important;
+  }
+
+  /* 1. STATE WORKING: [ WORKING ] */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-accent\))::after,
+  .row-hover[data-working="true"]::after {
+    content: 'WORKING' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(0, 255, 135, 0.22) !important;
+    color: #00ff87 !important;
+    border: 1px solid rgba(0, 255, 135, 0.45) !important;
+    animation: hb-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* 2. STATE NEEDS-INPUT: [ INPUT ] */
+  .row-hover:has(span[role="status"][class*="bg-amber-500"])::after,
+  .row-hover:has(span[role="status"].bg-amber-500)::after {
+    content: 'INPUT' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(255, 149, 0, 0.22) !important;
+    color: #ff9500 !important;
+    border: 1px solid rgba(255, 149, 0, 0.45) !important;
+    animation: hb-badge-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* 3. STATE UNREAD: [ NEW ] */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-success)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-success\))::after {
+    content: 'NEW' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(217, 70, 239, 0.22) !important;
+    color: #d946ef !important;
+    border: 1px solid rgba(217, 70, 239, 0.45) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* 4. STATE STALLED: [ STALLED ] */
+  .row-hover:has(span[role="status"][class*="border-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].border-\(--ui-accent\))::after {
+    content: 'STALLED' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(0, 255, 135, 0.12) !important;
+    color: #00ff87 !important;
+    border: 1px dashed rgba(0, 255, 135, 0.4) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* Penyesuaian untuk Card Mode (Inbox) agar badge tetap di header atas */
+  .row-hover:has(.flex-col)::after {
+    top: 9px !important;
+    transform: none !important;
+  }
+
+  /* Geser badge ke kiri sedikit saat baris di-hover agar tidak tertutup tombol kebab (⋯) */
+  .row-hover:hover::after {
+    right: 26px !important;
+  }
+
+  /* Kompatibilitas jika ada elemen .hb-status-badge */
   .hb-status-badge {
     font-size: 8px !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
@@ -238,11 +361,11 @@ customCSS: |
 
   @keyframes hb-badge-pulse {
     0%, 100% {
-      opacity: 0.75;
-      transform: scale(0.97);
+      opacity: 0.82;
+      transform: translateY(-50%) scale(0.97);
     }
     50% {
       opacity: 1;
-      transform: scale(1.02);
+      transform: translateY(-50%) scale(1.03);
     }
   }

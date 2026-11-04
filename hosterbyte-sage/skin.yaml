@@ -67,3 +67,137 @@ branding:
   prompt_symbol: "❯"
 
 tool_prefix: "┊"
+
+customCSS: |
+  /* ============================================================ */
+  /* Mini Status Badge (Inline Pseudo-Element pada Baris Sesi)    */
+  /* ============================================================ */
+
+  .row-hover:has(span[role="status"]),
+  .row-hover[data-working="true"] {
+    padding-right: 56px !important;
+  }
+
+  .row-hover:has(span[role="status"]):hover,
+  .row-hover[data-working="true"]:hover {
+    padding-right: 74px !important;
+  }
+
+  /* 1. STATE WORKING: [ WORKING ] */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-accent\))::after,
+  .row-hover[data-working="true"]::after {
+    content: 'WORKING' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(46, 125, 82, 0.18) !important;
+    color: #2e7d52 !important;
+    border: 1px solid rgba(46, 125, 82, 0.45) !important;
+    animation: hb-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* 2. STATE NEEDS-INPUT: [ INPUT ] */
+  .row-hover:has(span[role="status"][class*="bg-amber-500"])::after,
+  .row-hover:has(span[role="status"].bg-amber-500)::after {
+    content: 'INPUT' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(180, 83, 9, 0.18) !important;
+    color: #b45309 !important;
+    border: 1px solid rgba(180, 83, 9, 0.45) !important;
+    animation: hb-badge-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* 3. STATE UNREAD: [ NEW ] */
+  .row-hover:has(span[role="status"][class*="bg-(--ui-success)"])::after,
+  .row-hover:has(span[role="status"].bg-\(--ui-success\))::after {
+    content: 'NEW' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(225, 29, 72, 0.16) !important;
+    color: #e11d48 !important;
+    border: 1px solid rgba(225, 29, 72, 0.4) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  /* 4. STATE STALLED: [ STALLED ] */
+  .row-hover:has(span[role="status"][class*="border-(--ui-accent)"])::after,
+  .row-hover:has(span[role="status"].border-\(--ui-accent\))::after {
+    content: 'STALLED' !important;
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 8px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 700 !important;
+    padding: 1.5px 4.5px !important;
+    border-radius: 3px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    background: rgba(46, 125, 82, 0.12) !important;
+    color: #2e7d52 !important;
+    border: 1px dashed rgba(46, 125, 82, 0.4) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    transition: right 0.15s ease !important;
+  }
+
+  .row-hover:has(.flex-col)::after {
+    top: 9px !important;
+    transform: none !important;
+  }
+
+  .row-hover:hover::after {
+    right: 26px !important;
+  }
+
+  @keyframes hb-badge-pulse {
+    0%, 100% {
+      opacity: 0.82;
+      transform: translateY(-50%) scale(0.97);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.03);
+    }
+  }
