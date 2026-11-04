@@ -298,7 +298,9 @@ customCSS: |
 
   /* 4. STATE STALLED / BACKGROUND: Hollow Emerald Dashed Badge */
   .row-hover:has(span[role="status"][class*="border-(--ui-accent)"])::after,
-  .row-hover:has(span[role="status"].border-\(--ui-accent\))::after {
+  .row-hover:has(span[role="status"].border-\(--ui-accent\))::after,
+  .row-hover:has(span[role="status"][class*="border-(--ui-text-tertiary)"])::after,
+  .row-hover:has(span[role="status"].border-\(--ui-text-tertiary\))::after {
     content: 'STALLED' !important;
     position: absolute !important;
     top: 6px !important;
@@ -320,13 +322,17 @@ customCSS: |
     transition: right 0.15s ease !important;
   }
 
-  /* Jam sesi (time): tepat berada di bawah status badge di baris kedua */
-  .row-hover [data-row-actions] time,
+  /* Hilangkan positioning context pada container actions agar time & button merujuk langsung ke .row-hover */
+  .row-hover [data-row-actions],
+  .row-hover [data-row-actions] > div,
+  .row-hover [data-row-actions] > span {
+    position: static !important;
+  }
+
+  /* Jam sesi (time): Terkunci presisi ke tepi kanan .row-hover sejajar status badge */
   .row-hover time {
     position: absolute !important;
     right: 8px !important;
-    top: 23px !important;
-    bottom: auto !important;
     font-size: 9px !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     color: var(--ui-text-tertiary, #7ca289) !important;
@@ -336,20 +342,34 @@ customCSS: |
     transition: right 0.15s ease !important;
   }
 
-  /* Geser badge dan time ke kiri saat baris di-hover agar tidak tertabrak tombol kebab (⋮) */
-  .row-hover:hover::after {
-    right: 26px !important;
+  /* Pada baris aktif (ada status badge): jam di Baris 2 (top: 23px) tepat di bawah badge */
+  .row-hover:has(span[role="status"]) time,
+  .row-hover[data-working="true"] time {
+    top: 23px !important;
+    bottom: auto !important;
+    transform: none !important;
   }
-  .row-hover:hover [data-row-actions] time,
+
+  /* Pada baris idle: jam di tengah vertikal baris */
+  .row-hover:not(:has(span[role="status"])):not([data-working="true"]) time {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+  }
+
+  /* Geser badge dan time bersamaan ke kiri saat baris di-hover agar tombol kebab (⋮) muat */
+  .row-hover:hover::after,
   .row-hover:hover time {
     right: 26px !important;
   }
 
-  /* Tombol kebab menu (⋮) di pojok kanan */
+  /* Tombol kebab menu (⋮) di pojok kanan vertikal tengah */
   .row-hover button[data-session-actions] {
     position: absolute !important;
     right: 4px !important;
-    bottom: 5px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    bottom: auto !important;
     z-index: 6 !important;
   }
 
