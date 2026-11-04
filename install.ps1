@@ -63,6 +63,24 @@ switch ($Skin.ToLower()) {
     }
 }
 
+# Pasang desktop plugin lexa-welcome jika tersedia
+$pluginSource = Join-Path $PSScriptRoot "desktop-plugins\lexa-welcome"
+if (Test-Path $pluginSource) {
+    if ($env:HERMES_HOME) {
+        $pluginTarget = Join-Path $env:HERMES_HOME "desktop-plugins\lexa-welcome"
+    } elseif ($env:LOCALAPPDATA) {
+        $pluginTarget = Join-Path $env:LOCALAPPDATA "hermes\desktop-plugins\lexa-welcome"
+    } else {
+        $pluginTarget = Join-Path $HOME ".hermes\desktop-plugins\lexa-welcome"
+    }
+    Write-Host "🧩 Memasang desktop plugin 'lexa-welcome'..." -ForegroundColor Cyan
+    if (-not (Test-Path $pluginTarget)) {
+        New-Item -ItemType Directory -Path $pluginTarget -Force | Out-Null
+    }
+    Copy-Item -Path "$pluginSource\*" -Destination $pluginTarget -Recurse -Force
+    Write-Host "  ✓ Plugin lexa-welcome tersimpan di: $pluginTarget" -ForegroundColor Green
+}
+
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGreen
 if (Get-Command hermes -ErrorAction SilentlyContinue) {
     hermes config set display.skin $ActiveSkin

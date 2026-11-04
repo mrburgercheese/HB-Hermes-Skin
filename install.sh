@@ -65,6 +65,29 @@ case "$CHOICE" in
         ;;
 esac
 
+# Pasang desktop plugin lexa-welcome jika tersedia
+if [ -d "$SCRIPT_DIR/desktop-plugins/lexa-welcome" ]; then
+    PLUGIN_TARGET=""
+    if [ -n "$HERMES_HOME" ]; then
+        PLUGIN_TARGET="$HERMES_HOME/desktop-plugins/lexa-welcome"
+    elif [ -d "$HOME/AppData/Local/hermes" ]; then
+        PLUGIN_TARGET="$HOME/AppData/Local/hermes/desktop-plugins/lexa-welcome"
+    elif [ -n "$LOCALAPPDATA" ] && [ -d "$LOCALAPPDATA/hermes" ]; then
+        PLUGIN_TARGET="$LOCALAPPDATA/hermes/desktop-plugins/lexa-welcome"
+    else
+        PLUGIN_TARGET="$HOME/.hermes/desktop-plugins/lexa-welcome"
+    fi
+
+    echo "🧩 Memasang desktop plugin 'lexa-welcome'..."
+    mkdir -p "$PLUGIN_TARGET"
+    cp -r "$SCRIPT_DIR/desktop-plugins/lexa-welcome/"* "$PLUGIN_TARGET/"
+    if [ -n "$SKINS_DIR_WIN" ] && [ -d "/mnt/c/Users/$USER/AppData/Local/hermes" ]; then
+        mkdir -p "/mnt/c/Users/$USER/AppData/Local/hermes/desktop-plugins/lexa-welcome"
+        cp -r "$SCRIPT_DIR/desktop-plugins/lexa-welcome/"* "/mnt/c/Users/$USER/AppData/Local/hermes/desktop-plugins/lexa-welcome/"
+    fi
+    echo "  ✓ Plugin lexa-welcome tersimpan di: $PLUGIN_TARGET"
+fi
+
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 if command -v hermes >/dev/null 2>&1; then
     hermes config set display.skin "$ACTIVE_SKIN"

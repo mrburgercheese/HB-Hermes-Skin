@@ -140,6 +140,10 @@ HB-Hermes-Skin/
 ├── install.sh                  # Master installer suite (Linux/macOS/WSL)
 ├── install.ps1                 # Master installer suite (Windows PowerShell)
 ├── README.md                   # Dokumentasi utama dan panduan lengkap
+├── desktop-plugins/            # [EXTENSION] Ekstensi plugin Desktop Hermes
+│   └── lexa-welcome/           # Welcome Screen & Statusbar Lexa Operator
+│       ├── plugin.js           # Plugin loader (CHAT_EMPTY_AREA, Palette, Statusbar)
+│       └── lexa-cafe-avatar.jpg# Aksen visual Lexa Cafe Ponytail Avatar
 ├── hosterbyte-sage/            # [LIGHT MODE] Referensi img.hosterbyte.com
 │   ├── skin.yaml               # Definisi token warna hosterbyte-sage
 │   ├── install.sh              # 1-line auto installer mandiri (Bash)
@@ -148,9 +152,18 @@ HB-Hermes-Skin/
 └── hosterbyte-dark/            # [DARK MODE] Hosterbyte Deep Evergreen
     ├── skin.yaml               # Definisi token warna hosterbyte-dark
     ├── install.sh              # 1-line auto installer mandiri (Bash)
-    ├── install.ps1              # 1-line auto installer mandiri (PowerShell)
+    ├── install.ps1             # 1-line auto installer mandiri (PowerShell)
     └── README.md               # Dokumentasi spesifik hosterbyte-dark
 ```
+
+---
+
+## 🧩 Desktop Plugin: Lexa Welcome Screen
+
+Paket ini dilengkapi dengan plugin resmi **Lexa Welcome Screen** untuk antarmuka Desktop GUI Hermes (`CHAT_EMPTY_AREA`):
+- **Hero Dashboard Avatar**: Menampilkan avatar Lexa (Cafe Ponytail) dengan status operator internal Hosterbyte dan badge keahlian.
+- **Quick Action Prompts**: Tombol pintas sekali klik untuk diagnosis server (`cp01`, `necro`, `largo`), inspeksi MikroTik RouterOS 7, audit WHMCS, dan checklist WordPress.
+- **Statusbar Chip & Command Palette**: Integrasi statusbar kanan bawah dan perintah cepat via `Ctrl+K`.
 
 ---
 

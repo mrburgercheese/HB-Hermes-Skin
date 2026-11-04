@@ -2,6 +2,16 @@
 
 Semua perubahan penting pada repositori **HB-Hermes-Skin** didokumentasikan di berkas ini. Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id/1.0.0/) dan [Semantic Versioning](https://semver.org/).
 
+## [v1.2.0] - 2026-11-04 20:50 WIB
+
+### Added
+- **Desktop Plugin: Lexa Welcome Screen**: Menyertakan modul plugin resmi `desktop-plugins/lexa-welcome/` (`plugin.js` dan aset avatar) yang terintegrasi langsung pada area `CHAT_EMPTY_AREA`, Statusbar kanan, dan Command Palette (`Ctrl+K`).
+- **Auto-Installer Plugin Deployment**: Memperbarui `install.sh` dan `install.ps1` agar otomatis memasang desktop plugin ke direktori Hermes desktop-plugins lokal.
+
+### Fixed & Improved
+- **Horizontal Alignment Precision**: Mengeliminasi pergeseran horizontal (offset ~66px ke kiri) pada jam sesi (`time` / `now`) terhadap badge status (`STALLED`, `WORKING`, `NEW`, `INPUT`) dengan menyetel `position: static !important` pada container `[data-row-actions]` sehingga berlabuh tepat pada parent row.
+- **Double-Padding Elimination**: Menghapus padding berlebih pada label judul dan teks metadata di sidebar sehingga nama sesi tampil penuh tanpa terpotong prematur.
+
 ## [v1.1.1] - 2026-11-04 18:30 WIB
 
 ### Fixed & Improved
