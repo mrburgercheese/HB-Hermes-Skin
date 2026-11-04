@@ -44,3 +44,17 @@ irm https://raw.githubusercontent.com/mrburgercheese/HB-Hermes-Skin/main/hosterb
    ```bash
    hermes config set display.skin hosterbyte-dark
    ```
+
+---
+
+## ✨ Fitur Indikator Sesi Aktif & Mini-Badge (Desktop GUI)
+
+Tema ini menyertakan injeksi `customCSS` bawaan yang mengoptimalkan pengalaman navigasi multi-sesi di Hermes Desktop:
+
+- **Running Arc Border + Stardust**: Border card yang berputar halus memutari sesi aktif (`.arc-row`) lengkap dengan percikan kilau mint/putih diagonal.
+- **6px High-Contrast Dimmer Dot**:
+  - `working`: Electric Green `#00ff87` berdenyut lembut (halo 16px).
+  - `stalled / bg`: Cincin hollow Electric Green dengan bagian tengah transparan.
+  - `needs-input`: Sun Orange `#ff9500` berdenyut cepat (1.5s).
+  - `unread`: Neon Magenta/Purple `#d946ef` bernapas tenang.
+- **Stacked Status Badges**: Mini-badge monospace padat yang diletakkan persis di atas timestamp jam sesi (`WORKING`, `INPUT`, `NEW`, `STALLED`). Otomatis tersembunyi saat sesi idle.

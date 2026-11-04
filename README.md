@@ -27,7 +27,7 @@ Terinspirasi langsung dari antarmuka berbagi gambar retro [img.hosterbyte.com](h
 - **Status Ok / Warn / Error**: `#2E7D52` / `#B45309` / `#E11D48`
 
 ### 2. `hosterbyte-dark` (Dark Mode)
-Varian malam bernuansa hutan evergreen yang dalam (*velvety deep forest*). Menghilangkan silau cahaya dengan mempertahankan kontras tinggi dan aksen emerald yang hidup.
+Varian malam bernuansa hutan evergreen yang dalam (*velvety deep forest*). Menghilangkan silau cahaya dengan mempertahankan kontras tinggi dan aksen emerald yang hidup. Dilengkapi **Interactive Session Status Indicators** (Running Arc, 6px High-Contrast Dimmer Dot, & Stacked Mini Status Badges).
 
 - **Canvas Latar**: `#122017` (Deep Evergreen)
 - **Teks Utama**: `#F4F8F3` (Herbal Sage White)
@@ -35,6 +35,35 @@ Varian malam bernuansa hutan evergreen yang dalam (*velvety deep forest*). Mengh
 - **Aksen Brand**: `#10B981` (Vibrant Emerald)
 - **Teks Muted**: `#7CA289` (Eucalyptus Slate)
 - **Status Ok / Warn / Error**: `#10B981` / `#FBBF24` / `#E11D48`
+
+#### 💡 Spesifikasi Indikator Sesi Aktif (Desktop GUI):
+- **Running Arc Border**: Animasi border gradien emerald menyala berkecepatan 2.2s memutari card sesi aktif dengan 4 layer percikan kilau stardust (`radial-gradient`).
+- **6px Outer Dimmer Halo**: Inti dot 6px tajam dengan pendaran aura luar bernapas (*breathing dimmer pulse*) tanpa mengaburkan titik tengah.
+- **Stacked Status Badges**: Mini badge monospace di atas jam sesi pada sidebar:
+  - `WORKING` (Electric Green `#00ff87` pulse) — Sedang memproses turn / tool call.
+  - `STALLED` (Electric Green Hollow dashed) — Turn hening / background process berjalan.
+  - `INPUT` (Sun Orange `#ff9500` pulse 1.5s) — Menunggu konfirmasi / klarifikasi user.
+  - `NEW` (Neon Magenta/Purple `#d946ef`) — Hasil turn selesai saat aplikasi di background.
+
+---
+
+### 🌟 Simulasi Visual Indikator Status & Mini-Badge
+
+```text
+┌────────────────────────────────────────────────────────┐
+│ 🟢 APPS-BMCentral                          [ WORKING ] │  <-- Electric Green Pulse + Running Arc
+│    gemini-3.8-flash-high · 102 msgs             now    │
+├────────────────────────────────────────────────────────┤
+│ 🟠 Cek log bm-attend gudang CAM            [  INPUT  ] │  <-- Sun Orange Pulse (Menunggu respon)
+│    gemini-3.8-flash-high · 150 msgs             1m     │
+├────────────────────────────────────────────────────────┤
+│ 🟣 SOC - Graylog Alert Monitor             [   NEW   ] │  <-- Neon Purple (Turn selesai belum dibuka)
+│    gemini-3.8-flash-high · 64 msgs              4m     │
+├────────────────────────────────────────────────────────┤
+│ ⚪ Cek drive 10TB server 152.2                         │  <-- Idle / Diam (Badge otomatis sembunyi)
+│    gemini-3.8-flash-high · 42 msgs             22m     │
+└────────────────────────────────────────────────────────┘
+```
 
 ---
 
